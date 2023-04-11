@@ -1,0 +1,50 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Admin - Liste des quiz{% endblock %}
+
+{% block body %}
+    <h1>Liste des quiz</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for quiz in quizzes %}
+            <tr>
+                <td>{{ quiz.name }}</td>
+                <td>{{ quiz.description }}</td>
+                <td>
+                    {% if quiz.isApproved %}
+                        <span class="badge badge-success">Approuvé</span>
+                    {% else %}
+                        <span class="badge badge-danger">Non approuvé</span>
+                    {% endif %}
+                </td>
+                <td>
+                   {% if quiz.isApproved %}
+    <form action="{{ path('admin_quiz_disapprove', {'id': quiz.id}) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_token" value="{{ csrf_token('disapprove' ~ quiz.id) }}">
+        <button type="submit" class="btn btn-danger">Désapprouver</button>
+    </form>
+{% else %}
+    <form action="{{ path('admin_quiz_approve', {'id': quiz.id}) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_token" value="{{ csrf_token('approve' ~ quiz.id) }}">
+        <button type="submit" class="btn btn-primary">Approuver</button>
+    </form>
+{% endif %}
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun quiz trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

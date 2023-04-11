@@ -1,0 +1,38 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Liste des dossiers{% endblock %}
+
+{% block body %}
+    <h2>Liste des dossiers</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Médicaments</th>
+                <th>Date de Creations</th>
+                <th>Phobies</th>
+                <th>Résultats</th>
+                <th>Docteur</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for dossier in dossiers %}
+            <tr>
+                <td>{{ dossier.nom }}</td>
+                <td>{{ dossier.medicaments }}</td>
+                 <td>{{ dossier.datecreation }}</td>
+                <td>{{ dossier.phobies }}</td>
+                <td>{{ dossier.resultats }}</td>
+                <td>Dr Ahmed</td>
+               
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Pas de dossiers</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
