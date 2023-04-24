@@ -40,13 +40,18 @@ class Dossier
      */
     private $medicaments;
 
-    /**
- * @ORM\Column(type="date", nullable=true)
+
+/**
+ * @ORM\Column(type="string", length=255, nullable=true)
  * @Assert\NotBlank(message="La date de création ne peut pas être vide.")
- * @Assert\Date(message="La date de création n'est pas une date valide.")
- * @Assert\LessThanOrEqual(value="today", message="La date de création ne peut pas être antérieure à aujourd'hui.")
+ * @Assert\Length(
+ *      max = 255,
+ *      maxMessage = "La date de création ne peut pas dépasser {{ limit }} caractères"
+ * )
  */
 private $dateCreation;
+
+
 
     // ...
     /**
@@ -99,17 +104,22 @@ private $dateCreation;
 
         return $this;
     }
-    public function getDateCreation(): ?\DateTimeInterface
-    {
-        return $this->dateCreation;
-    }
+    public function getDateCreation(): ?string
+{
+    return $this->dateCreation;
+}
+
+public function setDateCreation(?string $dateCreation): self
+{
+    $this->dateCreation = $dateCreation;
+
+    return $this;
+}
+
+
+
     
-    public function setDateCreation(?\DateTimeInterface $dateCreation): self
-    {
-        $this->dateCreation = $dateCreation;
-    
-        return $this;
-    }
+
 
     public function getPhobies(): ?string
     {

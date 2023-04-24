@@ -36,6 +36,16 @@ class TestRepository extends ServiceEntityRepository
             $entityManager->flush();
         }
     }
+    public function search(string $query): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.question LIKE :query OR t.answer1 LIKE :query OR t.answer2 LIKE :query OR t.answer3 LIKE :query OR t.answer4 LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->getQuery()
+            ->getResult();
+    }
+    
+
 
     public function remove(Test $test, bool $flush = true)
     {

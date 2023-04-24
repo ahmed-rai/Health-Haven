@@ -90,9 +90,15 @@
 
       </div>
     </section><!-- End Departments Section -->
+    <h1>Votre Score</h1>
+    <h2>Quiz:  {{ quiz.name }}</h2>
+    {% if result_message %}
+        <p>{{ result_message|raw }}</p>
+    {% else %}
+        <p>No result message available.</p>
+    {% endif %}
 
-    <h1>Résultats du quiz</h1>
-    <p>Votre situation n'est pas si grave, mais vous pouvez consulter un de nos psy.</p>
+
     <div class="mt-4">
   <!-- End Departments Section  <a href="{{ path('psy') }}" class="btn btn-primary">Rechercher  psy</a>  -->
   

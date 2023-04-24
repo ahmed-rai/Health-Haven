@@ -39,14 +39,34 @@ class QuizRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+/*
     public function findApproved(): array
     {
         return $this->createQueryBuilder('q')
             ->andWhere('q.isApproved = true')
             ->getQuery()
             ->getResult();
-    }
+    } */
+/*
+    public function findApproved()
+{
+    return $this->createQueryBuilder('q')
+        ->andWhere('q.isApproved = :approved')
+        ->setParameter('approved', true)
+        ->getQuery()
+        ->getResult();
+}
+ */
+
+public function findApproved()
+{
+    return $this->createQueryBuilder('q')
+        ->andWhere('q.isApproved = :approved')
+        ->setParameter('approved', true)
+        ->getQuery()
+        ->getResult();
+}
+
 
     public function findByPsy(User $psy)
     {
@@ -57,6 +77,24 @@ class QuizRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function search(string $query): array
+{
+    return $this->createQueryBuilder('q')
+        ->andWhere('q.name LIKE :query OR q.description LIKE :query')
+        ->setParameter('query', '%' . $query . '%')
+        ->getQuery()
+        ->getResult();
+}
 
+public function searchAdmin(string $query): array
+{
+    $qb = $this->createQueryBuilder('q')
+        ->where('q.name LIKE :query')
+        ->orWhere('q.description LIKE :query')
+        ->setParameter('query', '%' . $query . '%')
+        ->orderBy('q.id', 'ASC');
+
+    return $qb->getQuery()->getResult();
+}
     // Other methods such as findByExampleField, findOneBySomeField, etc. should be included here if needed
 }

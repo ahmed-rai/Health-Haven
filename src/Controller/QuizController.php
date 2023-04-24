@@ -66,6 +66,22 @@ class QuizController extends AbstractController
         ]);
     }
 
+    /**
+ * @Route("/quiz/search", name="app_quiz_search")
+ */
+public function search(Request $request): Response
+{
+    $query = $request->query->get('q', '');
+
+    $quizzes = $this->getDoctrine()
+        ->getRepository(Quiz::class)
+        ->search($query);
+
+    return $this->render('quiz/index.html.twig', [
+        'quizzes' => $quizzes,
+    ]);
+}
+
     #[Route('/{id}', name: 'app_quiz_delete', methods: ['POST'])]
     public function delete(Request $request, Quiz $quiz, QuizRepository $quizRepository): Response
     {
@@ -77,20 +93,30 @@ class QuizController extends AbstractController
     }
      
     #[Route('/result/{id}', name: 'app_quiz_result', methods: ['GET', 'POST'])]
-    public function result(int $id, QuizRepository $quizRepository): Response
-    {
-        $quiz = $quizRepository->find($id);
+public function result(int $id, QuizRepository $quizRepository): Response
+{
+    $quiz = $quizRepository->find($id);
 
-        if (!$quiz) {
-            throw $this->createNotFoundException('Quiz not found');
-        }
-
-        // Replace with your logic to calculate the score, etc.
-        $resultMessage = "Votre situation n'est pas si grave, mais vous pouvez consulter un de nos psy.";
-
-        return $this->render('quiz/result.html.twig', [
-            'quiz' => $quiz,
-            'result_message' => $resultMessage,
-        ]);
+    if (!$quiz) {
+        throw $this->createNotFoundException('Quiz not found');
     }
+
+    // Random messages in French for demonstration purposes
+    $resultMessages = [
+        "Félicitations! Vous avez obtenu un score parfait!",
+        "Votre score est assez élevé. Nous vous recommandons de consulter un professionnel de la santé mentale si vous avez besoin d'aide.",
+        "Votre score est moyen. Vous pouvez peut-être bénéficier de quelques changements de style de vie pour améliorer votre bien-être mental.",
+        "Votre score est bas. Nous vous recommandons de prendre des mesures pour améliorer votre santé mentale, comme faire de l'exercice régulièrement et parler à un ami ou un professionnel de la santé mentale.",
+        "Votre score est très bas. Nous vous recommandons de chercher de l'aide professionnelle dès que possible."
+    ];
+
+    // Choose a random message from the array
+    $resultMessage = $resultMessages[array_rand($resultMessages)];
+
+    return $this->render('quiz/result.html.twig', [
+        'quiz' => $quiz,
+        'result_message' => $resultMessage,
+    ]);
+}
+
 }

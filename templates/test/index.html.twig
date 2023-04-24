@@ -99,6 +99,15 @@
 
     <h1>Bienvenu Dr. Ahmed</h1>
            <h2>Voila Vos Quiz & Questions</h2>
+
+<form action="{{ path('app_test_search') }}" method="GET">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Chercher un test" name="q" value="{{ app.request.get('q') }}">
+    <button class="btn btn-outline-secondary" type="submit">Chercher</button>
+  </div>
+</form>
+
+
     <table class="table">
         <thead>
             <tr>

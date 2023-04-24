@@ -1,0 +1,14 @@
+{% for dossier in dossiers %}
+    <tr>
+        <td>{{ dossier.nom }}</td>
+        <td>{{ dossier.medicaments }}</td>
+        <td>{{ dossier.datecreation }}</td>
+        <td>{{ dossier.phobies }}</td>
+        <td>{{ dossier.resultats }}</td>
+        <td>Dr Ahmed</td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="7">Pas de dossiers</td>
+    </tr>
+{% endfor %}

@@ -41,7 +41,7 @@ class Dossier1Type extends AbstractType
                     new NotBlank(['message' => 'Les médicaments ne peuvent pas être vides.']),
                 ],
             ])
-            ->add('datecreation', DateType::class, [
+            ->add('dateCreation', TextType::class, [
                 'label' => 'Date de création',
                 'widget' => 'single_text',
                 'attr' => [
@@ -52,8 +52,8 @@ class Dossier1Type extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'constraints' => [
                     new NotBlank(['message' => 'La date de création ne peut pas être vide.']),
-                    new Date(['message' => 'La date de création doit être une date valide.']),
-                    new GreaterThanOrEqual(['value' => 'today', 'message' => 'La date de création ne peut pas être dans le passé.']),
+                  //  new Date(['message' => 'La date de création doit être une date valide.']),
+                  //  new GreaterThanOrEqual(['value' => 'today', 'message' => 'La date de création ne peut pas être dans le passé.']),
                 ],
             ])
             

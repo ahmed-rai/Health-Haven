@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repository;
-
+use Doctrine\ORM\QueryBuilder;
 use App\Entity\Dossier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,7 +38,64 @@ class DossierRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+/*
+    public function findAllBySearchQuery(string $searchQuery): array
+    {
+        $queryBuilder = $this->createQueryBuilder('dossier');
+    
+        $queryBuilder->where('dossier.nom LIKE :searchQuery')
+            ->orWhere('dossier.medicaments LIKE :searchQuery')
+            ->orWhere('dossier.phobies LIKE :searchQuery')
+            ->orWhere('dossier.resultats LIKE :searchQuery')
+            ->setParameter('searchQuery', '%' . $searchQuery . '%');
+    
+        return $queryBuilder->getQuery()->getResult();
+    }
+    */
+    public function search(string $query): array
+{
+    return $this->createQueryBuilder('d')
+        ->andWhere('d.nom LIKE :query OR d.medicaments LIKE :query OR d.phobies LIKE :query OR d.resultats LIKE :query')
+        ->setParameter('query', '%' . $query . '%')
+        ->getQuery()
+        ->getResult();
+}
 
+
+public function searchAdmin(string $query): array
+{
+    $qb = $this->createQueryBuilder('d');
+
+    if (!empty($query)) {
+        $qb->andWhere(
+            $qb->expr()->orX(
+                $qb->expr()->like('d.nom', ':query'),
+                $qb->expr()->like('d.medicaments', ':query'),
+                $qb->expr()->like('d.dateCreation', ':query'),
+                $qb->expr()->like('d.phobies', ':query'),
+                $qb->expr()->like('d.resultats', ':query')
+            )
+        )->setParameter('query', '%' . $query . '%');
+    }
+
+    return $qb->getQuery()->getResult();
+}
+
+public function findPopularMedications(int $limit = 10): array
+{
+    $qb = $this->createQueryBuilder('dossier');
+    $qb->select('dossier.medicaments as medication, COUNT(dossier.id) as total')
+        ->where($qb->expr()->isNotNull('dossier.medicaments'))
+        ->groupBy('dossier.medicaments')
+        ->orderBy('total', 'DESC')
+        ->setMaxResults($limit);
+
+    $query = $qb->getQuery();
+
+    return $query->getResult();
+}
+
+}
 //    /**
 //     * @return Dossier[] Returns an array of Dossier objects
 //     */
@@ -63,4 +120,4 @@ class DossierRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+

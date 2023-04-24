@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat du Quiz{% endblock %}
+
+{% block body %}
+    <h1>Votre score au Quiz</h1>
+    <h2>Quiz: {{ quiz.name }}</h2>
+    <p>
+        Votre score est de <strong>{{ score }}</strong> sur un total de <strong>{{ max_score }}</strong>.
+    </p>
+    <p>
+        {% if score >= threshold %}
+            En fonction de votre score, vous pourriez rencontrer des problèmes. Nous vous recommandons de consulter un professionnel.
+        {% else %}
+            En fonction de votre score, tout semble bien se passer. Continuez comme ça !
+        {% endif %}
+    </p>
+
+    <a href="{{ path('quiz_selection') }}" class="btn btn-primary">Passer un autre quiz</a>
+{% endblock %}

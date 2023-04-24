@@ -123,44 +123,61 @@
 
 
     <table class="table">
- 
-        <thead>
-            <tr>
-                    <div class="container">
-    <h1>Dossier index</h1>
-  
-  </div>
-                <th>Nom</th>
-                <th>Medicaments</th>
-                <th>Date de Creation</th>
-                <th>Phobies</th>
-                <th>Resultats</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for dossier in dossiers %}
-            <tr>
-                
-                <td>{{ dossier.nom }}</td>
-                <td>{{ dossier.medicaments }}</td>
-                 <td>{{ dossier.datecreation }}</td>
-                <td>{{ dossier.phobies }}</td>
-                <td>{{ dossier.resultats }}</td>
-                <td>
-                    <a href="{{ path('app_dossier_show', {'id': dossier.id}) }}">show</a>
-                    <a href="{{ path('app_dossier_edit', {'id': dossier.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-         </table>
-    
 
-    <a href="{{ path('app_dossier_new') }}">Create new</a>
+         <thead>
+            <tr> 
+  <div class="container">
+  <h1>Dossier index</h1>
+
+<form action="{{ path('app_dossier_search') }}" method="GET">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Chercher un dossier" name="q" value="{{ app.request.get('q') }}">
+    <button class="btn btn-outline-secondary" type="submit">Chercher</button>
+  </div>
+</form>
+
+
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Medicaments</th>
+      <th>Date de Creation</th>
+      <th>Phobies</th>
+      <th>Resultats</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for dossier in dossiers %}
+    <tr>
+
+      <td>{{ dossier.nom }}</td>
+      <td>{{ dossier.medicaments }}</td>
+      <td>{{ dossier.datecreation }}</td>
+      <td>{{ dossier.phobies }}</td>
+      <td>{{ dossier.resultats }}</td>
+      <td>
+        <a href="{{ path('app_dossier_show', {'id': dossier.id}) }}">Consulter</a>
+        <a href="{{ path('app_dossier_edit', {'id': dossier.id}) }}">Modifier</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="6">Pas de dossier trouvé</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{{ path('app_dossier_new') }}">Ajouter Dossier</a>
+<div class="row">
+    <div class="col-md-12">
+        <a href="{{ path('dossier_export') }}" class="btn btn-primary">Exporter en Excel</a>
+    </div>
+</div>
+
    
 {% endblock %}

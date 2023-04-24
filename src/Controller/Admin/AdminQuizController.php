@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Service\TwilioSmsSender;
 use App\Entity\Quiz;
 use App\Repository\QuizRepository;
 use App\Repository\TestRepository;
@@ -10,17 +11,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Service\NotificationServer;
 
 /**
  * @Route("/admin", name="admin_quiz_")
  */
 class AdminQuizController extends AbstractController
 {
+  
     private $quizRepository;
+    private $notificationServer;
+    private $smsSender;
 
-    public function __construct(QuizRepository $quizRepository)
+    public function __construct(QuizRepository $quizRepository, NotificationServer $notificationServer, TwilioSmsSender $smsSender)
     {
         $this->quizRepository = $quizRepository;
+        $this->notificationServer = $notificationServer;
+        $this->smsSender = $smsSender;
     }
 
     /**
@@ -34,20 +42,36 @@ class AdminQuizController extends AbstractController
             'quizzes' => $quizzes,
         ]);
     }
+/**
+ * @Route("/admin/approve/{id}", name="approve", methods={"GET", "POST"})
+ */
+public function approveQuiz(Request $request, Quiz $quiz): Response
+{
+    if ($this->isCsrfTokenValid('approve'.$quiz->getId(), $request->request->get('_token'))) {
+        $quiz->setIsApproved(true);
+        $this->quizRepository->save($quiz, true);
+        $this->addFlash('Bingo', 'Quiz approuvé ');
 
-    /**
-     * @Route("/admin/approve/{id}", name="approve", methods={"GET", "POST"})
-     */
-    public function approveQuiz(Request $request, Quiz $quiz): Response
-    {
-        if ($this->isCsrfTokenValid('approve'.$quiz->getId(), $request->request->get('_token'))) {
-            $quiz->setIsApproved(true);
-            $this->quizRepository->save($quiz, true);
-            $this->addFlash('success', 'Quiz approved successfully.');
-        }
+        // Send a notification to all connected clients
+        $message = "Your quiz has been approved!";
+        $payload = [
+            'type' => 'notification',
+            'message' => $message,
+        ];
+        $this->notificationServer->sendNotification($payload);
 
-        return $this->redirectToRoute('admin_quiz_index');
+        // Send SMS notification (commented)
+        // $toPhoneNumber = '+21652662266'; // Replace this with the recipient's phone number
+        // $smsMessage = 'Votre quiz a été approuvé !';
+        // $this->smsSender->sendSms($toPhoneNumber, $smsMessage);
     }
+
+    return $this->redirectToRoute('admin_quiz_index');
+}
+
+
+
+
 /**
  * @Route("/disapprove/{id}", name="disapprove", methods={"GET", "POST"})
  */
@@ -83,5 +107,56 @@ public function disapproveQuiz(Request $request, Quiz $quiz): Response
             'tests' => $tests,
         ]);
     }
+  
+
+    /**
+     * @Route("/admin/ajax-search", name="quizzes_ajax_search")
+     */
+    public function ajaxSearch(Request $request, QuizRepository $quizRepository): JsonResponse
+    {
+        $query = $request->query->get('q', '');
+        $quizzes = $quizRepository->searchAdmin($query);
+
+        $html = $this->renderView('_quizzes_list.html.twig', [
+            'quizzes' => $quizzes,
+        ]);
+
+        return new JsonResponse(['html' => $html]);
+    }
     
 }
+
+    
+
+
+
+/*    public function approveQuiz(Request $request, Quiz $quiz): Response
+    {
+        if ($this->isCsrfTokenValid('approve'.$quiz->getId(), $request->request->get('_token'))) {
+            $quiz->setIsApproved(true);
+            $this->quizRepository->save($quiz, true);
+            $this->addFlash('success', 'Quiz approved successfully.');
+        }
+
+        return $this->redirectToRoute('admin_quiz_index');
+    } */
+
+
+
+ /*
+    public function approveQuiz(Request $request, Quiz $quiz): Response
+    {
+        if ($this->isCsrfTokenValid('approve'.$quiz->getId(), $request->request->get('_token'))) {
+            $quiz->setIsApproved(true);
+            $this->quizRepository->save($quiz, true);
+            $this->addFlash('success', 'Quiz approved successfully.');
+
+            // Send SMS notification
+            $toPhoneNumber = '+21652662266'; // Replace this with the recipient's phone number
+            $smsMessage = 'Votre quiz a été approuvé !';
+            $this->smsSender->sendSms($toPhoneNumber, $smsMessage);
+        }
+
+        return $this->redirectToRoute('admin_quiz_index');
+    } 
+    */

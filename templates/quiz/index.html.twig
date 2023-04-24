@@ -101,7 +101,12 @@
 
 
     <h1>Vos Quiz </h1>
-
+<form action="{{ path('app_quiz_search') }}" method="GET">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Chercher un quiz" name="q" value="{{ app.request.get('q') }}">
+    <button class="btn btn-outline-secondary" type="submit">Chercher</button>
+  </div>
+</form>
     <table class="table">
         <thead>
             <tr>
@@ -142,7 +147,28 @@
     {% endfor %}
   </tbody>
 </table>
+<div class="container">
+        {# Your existing content #}
 
+        {# Add this block to display toast notifications #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="toast-container">
+                    <div class="toast toast-{{ label }}" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="mr-auto">{{ label | capitalize }}</strong>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 <div class="text-end">
   <a href="{{ path('app_quiz_new') }}" class="btn btn-primary">Ajouter un Quiz</a>
 </div>
@@ -156,4 +182,17 @@
         });
     });
 </script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let toasts = document.querySelectorAll('.toast');
+            toasts.forEach(function (toast) {
+                new bootstrap.Toast(toast).show();
+            });
+        });
+    </script>
 {% endblock %}

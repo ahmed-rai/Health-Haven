@@ -27,6 +27,22 @@ class TestController extends AbstractController
     }
 
     /**
+ * @Route("/test/search", name="app_test_search")
+ */
+public function search(Request $request): Response
+{
+    $query = $request->query->get('q', '');
+
+    $tests = $this->getDoctrine()
+        ->getRepository(Test::class)
+        ->search($query);
+
+    return $this->render('test/index.html.twig', [
+        'tests' => $tests,
+    ]);
+}
+
+    /**
      * @Route("/new", name="app_test_new", methods={"GET","POST"})
      */
     public function new(Request $request, QuizRepository $quizRepository): Response
