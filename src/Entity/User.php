@@ -1,8 +1,13 @@
 <?php
+<<<<<<< HEAD
+=======
+// src/Entity/User.php
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+<<<<<<< HEAD
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -36,10 +41,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string
      *@Assert\NotBlank(message = "Le champ 'Prenom' ne doit pas être vide.")
      * @ORM\Column(name="lastname", type="string", length=500, nullable=false)
+=======
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="user")
+ */
+class User
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer", name="idUser")
+     */
+    private $idUser;
+
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    private $Firstname;
+
+    /**
+     * @ORM\Column(type="string", length=250)
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
      */
     private $lastname;
 
     /**
+<<<<<<< HEAD
      * @var string
      *@Assert\NotBlank(message = "Le champ 'Email' ne doit pas être vide.")
      * @Assert\Email(
@@ -98,16 +127,61 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+=======
+     * @ORM\Column(type="string", length=250)
+     */
+    private $Email;
+
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    private $mdp;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Phone;
+
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    private $Addresse;
+
+    /**
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    private $speciality;
+
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    private $Role;
+
+    // Getters and setters for each property...
+
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
     }
 
     public function getFirstname(): ?string
     {
+<<<<<<< HEAD
         return $this->firstname;
     }
 
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
+=======
+        return $this->Firstname;
+    }
+
+    public function setFirstname(string $Firstname): self
+    {
+        $this->Firstname = $Firstname;
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 
         return $this;
     }
@@ -126,16 +200,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getEmail(): ?string
     {
+<<<<<<< HEAD
         return $this->email;
     }
 
     public function setEmail(string $email): self
     {
         $this->email = $email;
+=======
+        return $this->Email;
+    }
+
+    public function setEmail(string $Email): self
+    {
+        $this->Email = $Email;
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function getPassword(): ?string
     {
         return $this->password;
@@ -144,30 +228,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+=======
+    public function getMdp(): ?string
+    {
+        return $this->mdp;
+    }
+
+    public function setMdp(string $mdp): self
+    {
+        $this->mdp = $mdp;
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 
         return $this;
     }
 
     public function getPhone(): ?int
     {
+<<<<<<< HEAD
         return $this->phone;
     }
 
     public function setPhone(int $phone): self
     {
         $this->phone = $phone;
+=======
+        return $this->Phone;
+    }
+
+    public function setPhone(int $Phone): self
+    {
+        $this->Phone = $Phone;
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 
         return $this;
     }
 
     public function getAddresse(): ?string
     {
+<<<<<<< HEAD
         return $this->addresse;
     }
 
     public function setAddresse(string $addresse): self
     {
         $this->addresse = $addresse;
+=======
+        return $this->Addresse;
+    }
+
+    public function setAddresse(string $Addresse): self
+    {
+        $this->Addresse = $Addresse;
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 
         return $this;
     }
@@ -177,13 +289,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->speciality;
     }
 
+<<<<<<< HEAD
     public function setSpeciality(string $speciality): self
+=======
+    public function setSpeciality(?string $speciality): self
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
     {
         $this->speciality = $speciality;
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function eraseCredentials()
 {
 }
@@ -216,4 +333,17 @@ public function getUsername()
 }
 
 
+=======
+    public function getRole(): ?string
+    {
+        return $this->Role;
+    }
+
+    public function setRole(string $Role): self
+    {
+        $this->Role = $Role;
+
+        return $this;
+    }
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 }

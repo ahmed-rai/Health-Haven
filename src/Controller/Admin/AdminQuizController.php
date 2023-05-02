@@ -22,14 +22,21 @@ class AdminQuizController extends AbstractController
   
     private $quizRepository;
     private $notificationServer;
+<<<<<<< HEAD
  //   private $smsSender;
 
  /*   public function __construct(QuizRepository $quizRepository, NotificationServer $notificationServer, TwilioSmsSender $smsSender)
+=======
+    private $smsSender;
+
+    public function __construct(QuizRepository $quizRepository, NotificationServer $notificationServer, TwilioSmsSender $smsSender)
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
     {
         $this->quizRepository = $quizRepository;
         $this->notificationServer = $notificationServer;
         $this->smsSender = $smsSender;
     }
+<<<<<<< HEAD
  */ 
 public function __construct(QuizRepository $quizRepository, NotificationServer $notificationServer)
 {
@@ -38,6 +45,8 @@ public function __construct(QuizRepository $quizRepository, NotificationServer $
   //  $this->smsSender = $smsSender;
 }
 
+=======
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 
     /**
      * @Route("/", name="index", methods={"GET"})
@@ -69,9 +78,15 @@ public function approveQuiz(Request $request, Quiz $quiz): Response
         $this->notificationServer->sendNotification($payload);
 
         // Send SMS notification (commented)
+<<<<<<< HEAD
        // $toPhoneNumber = '+21652662266'; // Replace this with the recipient's phone number
        // $smsMessage = 'Votre quiz a été approuvé !';
      //   $this->smsSender->sendSms($toPhoneNumber, $smsMessage);
+=======
+        // $toPhoneNumber = '+21652662266'; // Replace this with the recipient's phone number
+        // $smsMessage = 'Votre quiz a été approuvé !';
+        // $this->smsSender->sendSms($toPhoneNumber, $smsMessage);
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
     }
 
     return $this->redirectToRoute('admin_quiz_index');
@@ -88,7 +103,11 @@ public function disapproveQuiz(Request $request, Quiz $quiz): Response
     if ($this->isCsrfTokenValid('disapprove'.$quiz->getId(), $request->request->get('_token'))) {
         $quiz->setIsApproved(false);
         $this->quizRepository->save($quiz, true);
+<<<<<<< HEAD
         $this->addFlash('Oups', 'Quiz disapprové.');
+=======
+        $this->addFlash('warning', 'Quiz disapproved successfully.');
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
     }
 
     return $this->redirectToRoute('admin_quiz_index');

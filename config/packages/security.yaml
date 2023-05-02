@@ -1,6 +1,7 @@
 security:
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+<<<<<<< HEAD
     
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
@@ -17,12 +18,20 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+=======
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        users_in_memory: { memory: null }
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
+<<<<<<< HEAD
             provider: app_user_provider
             custom_authenticator: App\Security\LoginAuthenticator
             logout:
@@ -31,6 +40,21 @@ security:
                 # where to redirect after logout
                 # target: app_any_route
 
+=======
+            provider: users_in_memory
+
+
+
+
+ #    role_hierarchy:
+       #  ROLE_ADMIN: ROLE_USER
+      #   ROLE_PSY: ROLE_USER
+
+    access_control:
+     #    - { path: ^/admin, roles: ROLE_ADMIN }
+     #    - { path: ^/psy, roles: ROLE_PSY }
+     #    - { path: ^/patient, roles: ROLE_USER }
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -39,12 +63,20 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+<<<<<<< HEAD
     access_control:
+=======
+    
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
     security:
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
         password_hashers:
             # By default, password hashers are resource intensive and take time. This is
             # important to generate secure password hashes. In tests however, secure hashes

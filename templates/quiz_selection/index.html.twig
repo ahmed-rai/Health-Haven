@@ -3,8 +3,11 @@
 
 {% block title %}Quiz Selection{% endblock %}
 
+<<<<<<< HEAD
    
 
+=======
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 {% block body %}
  <!-- . 
     <h1>Dossier index</h1>.. -->
@@ -96,6 +99,7 @@
     <h1> Selection</h1>
     <ul>
         {% for quiz in quizzes %}
+<<<<<<< HEAD
           
                <a href="{{ path('take_quiz', {'id': quiz.id}) }}" class="quiz-button">
             <button type="button">{{ quiz.name }}</button>
@@ -131,4 +135,13 @@
         }
     </style>
 
+=======
+            <li>
+                <a href="{{ path('take_quiz', {'id': quiz.id}) }}">
+                    {{ quiz.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 {% endblock %}

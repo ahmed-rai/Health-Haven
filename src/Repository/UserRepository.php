@@ -1,19 +1,33 @@
 <?php
+<<<<<<< HEAD
 
 namespace App\Repository;
 
 use App\Entity\Quiz;
+=======
+// src/Repository/UserRepository.php
+
+namespace App\Repository;
+
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+<<<<<<< HEAD
  * @extends ServiceEntityRepository<Quiz>
  *
  * @method Quiz|null find($id, $lockMode = null, $lockVersion = null)
  * @method Quiz|null findOneBy(array $criteria, array $orderBy = null)
  * @method Quiz[]    findAll()
  * @method Quiz[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+=======
+ * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
  */
 class UserRepository extends ServiceEntityRepository
 {
@@ -21,6 +35,7 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+<<<<<<< HEAD
 
     public function save(User $entity, bool $flush = false): void
     {
@@ -97,4 +112,6 @@ public function searchAdmin(string $query): array
     return $qb->getQuery()->getResult();
 }
     // Other methods such as findByExampleField, findOneBySomeField, etc. should be included here if needed
+=======
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 }

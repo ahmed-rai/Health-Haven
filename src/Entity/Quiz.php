@@ -9,7 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+<<<<<<< HEAD
 use Symfony\Component\Serializer\Annotation\Groups;
+=======
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuizRepository")

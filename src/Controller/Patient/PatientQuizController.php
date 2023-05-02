@@ -41,9 +41,13 @@ class PatientQuizController extends AbstractController
         return $this->render('patient_quiz/show.html.twig', [
             'quiz' => $quiz,
         ]);
+<<<<<<< HEAD
     } 
 
     /*
+=======
+    } /*
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
     #[Route('/quiz/result/{id}', name: 'app_quiz_result', methods: ['POST'])]
     public function result(int $id, QuizRepository $quizRepository, Request $request, EntityManagerInterface $entityManager): Response
     {

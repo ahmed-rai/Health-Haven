@@ -1,0 +1,11 @@
+.my-form-class label {
+    display: inline-block;
+    width: 150px;
+}
+
+.my-form-class input[type="text"], 
+.my-form-class select {
+    display: inline-block;
+    width: 250px;
+    margin-left: 10px;
+}

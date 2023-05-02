@@ -3,6 +3,7 @@
 #    controller: App\Controller\DefaultController::index
 
 
+<<<<<<< HEAD
 
 search:
   path: /atm/search
@@ -11,3 +12,5 @@ search:
 app_map:
     path: '/map'
     controller: 'App\Controller\LaboratoireController::map'
+=======
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5

@@ -12,3 +12,12 @@ services:
     image: schickling/mailcatcher
     ports: ["1025", "1080"]
 ###< symfony/mailer ###
+<<<<<<< HEAD
+=======
+
+###> symfony/mercure-bundle ###
+  mercure:
+    ports:
+      - "80"
+###< symfony/mercure-bundle ###
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5

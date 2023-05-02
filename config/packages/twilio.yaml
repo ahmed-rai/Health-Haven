@@ -1,0 +1,7 @@
+services:
+    App\Service\TwilioSmsSender:
+        class: App\Service\TwilioSmsSender
+        arguments:
+            $accountSid: '%env(string:TWILIO_ACCOUNT_SID)%'
+            $authToken: '%env(string:TWILIO_AUTH_TOKEN)%'
+            $twilioPhoneNumber: '%env(string:TWILIO_PHONE_NUMBER)%'

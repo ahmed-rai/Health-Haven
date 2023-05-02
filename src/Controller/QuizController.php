@@ -21,6 +21,7 @@ class QuizController extends AbstractController
         ]);
     }
 
+<<<<<<< HEAD
 
  /**
      * @Route("/api/quizzes", name="api_quizzes", methods={"GET"})
@@ -34,6 +35,8 @@ class QuizController extends AbstractController
         return new JsonResponse($json, 200, [], true);
     }
 
+=======
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
     #[Route('/new', name: 'app_quiz_new', methods: ['GET', 'POST'])]
     public function new(Request $request, QuizRepository $quizRepository): Response
     {

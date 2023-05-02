@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/my_proj.iml" filepath="$PROJECT_DIR$/.idea/my_proj.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/pidev.iml" filepath="$PROJECT_DIR$/.idea/pidev.iml" />
+>>>>>>> 9245021fbb87523cb7633316c1f0514e2a867ea5
     </modules>
   </component>
 </project>
