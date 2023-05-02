@@ -1,0 +1,20 @@
+{% extends 'tbib.html.twig' %}
+
+{% block title %}Quiz Score{% endblock %}
+
+{% block body %}
+     <h1>Your Quiz Score</h1>
+    <h2>Quiz: {{ quiz.name }}</h2>
+    <p>
+        Your score is not calculated in this example.
+    </p>
+    <p>
+        {% set messages = [            "Félicitations, vous avez obtenu un excellent score ! Continuez comme ça.",            "Bravo, vous avez réussi le quiz avec succès.",            "Vous êtes sur la bonne voie, ne vous découragez pas.",            "C'est un bon début, mais vous pouvez faire mieux la prochaine fois.",            "Il y a encore des efforts à faire, mais ne baissez pas les bras.",            "Ce n'est pas votre jour de chance, mais ne vous en faites pas, vous réussirez la prochaine fois.",        ] %}
+        
+        {% set randomMessage = messages|random %}
+        
+        {{ randomMessage }}
+    </p>
+
+    <a href="{{ path('quiz_selection') }}" class="btn btn-primary">Take another quiz</a>
+{% endblock %}

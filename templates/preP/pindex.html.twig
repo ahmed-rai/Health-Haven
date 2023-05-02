@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>prescription</title>
+	</head>
+	<body>
+		<div style="text-align: right">
+			<p>{{ "now"|date("d/m/Y") }}</p>
+		</div>
+		<h2 style="text-align: center">Tableau des prescriptions</h2>
+                  <h2 style="text-align: right">Patient:  Aziz Trabelsi </h2>
+		<table border="1" style="margin: auto; text-align: center;">
+			<thead>
+				<tr>
+					<th>médicament</th>
+					<th>dosage</th>
+					<th rowspan="{{ b|length }}">signature</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for Prescription in b %}
+					<tr>
+						<td>{{ Prescription.nomMed }}</td>
+						<td>{{ Prescription.dosage }}</td>
+						{% if loop.first %}
+							<td>{{ Prescription.signature }}</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>

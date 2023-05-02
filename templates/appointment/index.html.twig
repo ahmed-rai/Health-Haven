@@ -1,0 +1,142 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Hello ParapharmacieController!{% endblock %}
+
+{% block body %}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-YnznVtMWhG2l5O5I3qC1hTpjOatDGfkhBZ+/XcZttvp8MIvzBjH+LTaUfme6zWd+v0J+tF0M7VYXpz6zg8WOvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<style>
+  .container{
+    margin-top:30px;
+    margin-right:50px;
+  }
+  
+
+</style>
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+<!-- Sale & Revenue Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-duotone fa-calendar-check fa-4x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Rdv</p>
+                                <h6 class="mb-0">{{ totalAppointments }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-4x text-danger"></i>
+                            <div class="ms-3">
+                                <p class="mb-2"> RDV confirmé </p>
+                                <h6 class="mb-0">{{ waitingAppointments }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-area fa-4x text-success"></i>
+                            <div class="ms-3">
+                                <p class="mb-2"> en attente</p>
+                                <h6 class="mb-0">{{ confirmedAppointments }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-pie fa-4x text-warning"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Revenue</p>
+                                <h6 class="mb-0">$1234</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sale & Revenue End -->
+            <div class="btn">
+                  <a href="{{ path('appointments_search')}}" class="btn btn-primary" title="chercher">
+                    <i class="bi bi-search">chercher des rendez-vous</i>
+                  </a>
+
+<div class="container">
+
+
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+
+      <table class="table table-striped">
+        <thead style="background-color:#1977CC;">
+          <tr>
+            <th>Id</th>
+            <th>Date RDV</th>
+            <th>Heure RDV</th>
+            <th>Id patient</th>
+            <th>Id médecin</th>
+            <th>Etat RDV</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appointment in a %}
+            <tr>
+              <td>{{ appointment.idap }}</td>
+              <td>{{ appointment.dateap ? appointment.dateap|date('Y-m-d') : '' }}</td>
+              <td>{{ appointment.hour|date('H:i') }}</td>
+              <td>{{ appointment.medecinName }}</td>
+              <td>{{ appointment.getPatientName() }}</td>
+              <td>
+                {% if appointment.status == 1 %}
+                  <span class="badge badge-success">Confirmé</span>
+                {% else %}
+                  <span class="badge badge-warning">En attente</span>
+                {% endif %}
+              </td>
+
+              <td>
+                {% if appointment.status == 0 %}
+                <a href="{{ url('appointments_confirm', {'id': appointment.idap}) }}" class="btn btn-success" title="Confirmer le rendez-vous">
+                    <i class="bi bi-check"></i>
+                  </a>
+                {% endif %}
+                <div class="btn-group">
+                  <a href="{{ path('appointments_show', {'id': appointment.idap})}}" class="btn btn-primary" title="Voir">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  <a href="{{ path('appointments_edit', {'id': appointment.idap})}}" class="btn btn-info" title="Modifier">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <a href="{{ path('appointments_delete', {'id': appointment.idap})}}" class="btn btn-danger" title="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')">
+                    <i class="bi bi-trash"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="5">Aucun enregistrement trouvé</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% for message in app.session.flashBag.get('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

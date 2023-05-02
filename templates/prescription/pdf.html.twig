@@ -1,0 +1,51 @@
+{% block stylesheets %}
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <h1>Prescriptions List</h1>
+   <table class="meta">
+        <tr>
+            <th><span contenteditable>Prescription #</span></th>
+            <td><span contenteditable>{{ prescriptions.id }}</span></td>
+        </tr>
+        </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Dosage</th>
+        <th>Signature</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for prescription in prescriptions %}
+        <tr>
+          <td>{{ prescription.nomMed }}</td>
+          <td>{{ prescription.dosage }}</td>
+          <td>{{ prescription.signature }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

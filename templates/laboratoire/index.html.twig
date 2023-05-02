@@ -1,0 +1,39 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Laboratoire index{% endblock %}
+
+{% block body %}
+    <h1>Laboratoire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Nom</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for laboratoire in laboratoires %}
+            <tr>
+
+                <td>{{ laboratoire.nom }}</td>
+                <td>{{ laboratoire.latitude }}</td>
+                <td>{{ laboratoire.longitude }}</td>
+                <td>
+                    <a href="{{ path('app_laboratoire_show', {'id': laboratoire.id}) }}">Afficher</a>
+                    <a href="{{ path('app_laboratoire_edit', {'id': laboratoire.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_laboratoire_new') }}">Ajouter</a>
+{% endblock %}

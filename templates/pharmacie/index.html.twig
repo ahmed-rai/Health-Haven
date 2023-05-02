@@ -1,0 +1,38 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Pharmacie index{% endblock %}
+
+{% block body %}
+    <h1>Pharmacies </h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Nom</th>
+            <th>Emplacement</th>
+            <th>Numéro Tel</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pharmacie in pharmacies %}
+            <tr>
+
+                <td>{{ pharmacie.nom }}</td>
+                <td>{{ pharmacie.emplacement }}</td>
+                <td>{{ pharmacie.numtel }}</td>
+                <td>
+                    <a href="{{ path('app_pharmacie_showBack', {'id': pharmacie.id}) }}">Afficher</a>
+                    <a href="{{ path('app_pharmacie_edit', {'id': pharmacie.id}) }}">Modifier</a>                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_pharmacie_new') }}">Ajouter</a>
+
+{% endblock %}

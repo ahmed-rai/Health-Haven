@@ -1,0 +1,30 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Medicaments{% endblock %}
+
+{% block body %}
+    <h1>Medicaments</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Dci</th>
+                <td>{{ medicament.dci }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{{ medicament.disponibilite }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ medicament.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_medicaments_indexBack') }}">Retour</a>
+
+    <a href="{{ path('app_medicaments_edit', {'id': medicament.id}) }}">edit</a>
+
+    {{ include('medicaments/_delete_form.html.twig') }}
+{% endblock %}

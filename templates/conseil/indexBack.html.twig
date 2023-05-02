@@ -1,0 +1,38 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Conseil index{% endblock %}
+
+{% block body %}
+    <h1>Conseil index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Titre</th>
+            <th>Description</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for conseil in conseils %}
+            <tr>
+
+                <td>{{ conseil.titre }}</td>
+                <td>{{ conseil.description }}</td>
+                <td>
+                    <a href="{{ path('app_conseil_showBack', {'id': conseil.id}) }}">Afficher</a>
+
+                    <a href="{{ path('app_conseil_edit', {'id': conseil.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_conseil_new') }}">Ajouter</a>
+
+{% endblock %}

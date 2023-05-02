@@ -1,0 +1,55 @@
+{% extends 'tbib.html.twig' %}
+
+{% block title %}Edit Results{% endblock %}
+
+{% block body %}
+<!-- ======= Examens médicaux Section ======= -->
+<section id="examens" class="examens">
+  <div class="container">
+    <div class="section-title">
+      <h2>Examens médicaux</h2>
+      <p>Les examens médicaux permettent aux médecins de diagnostiquer et de surveiller diverses maladies et troubles. Ils sont essentiels pour assurer une prise en charge médicale appropriée et efficace. Dans cette section, nous aborderons différents types d'examens médicaux et leurs applications dans divers domaines médicaux.</p>
+    </div>
+<div class="row gy-4">
+  <div class="col-lg-4">
+    <ul class="nav nav-tabs flex-column">
+      <li class="nav-item">
+        <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Tests sanguins</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Tests COVID-19</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Tests d'urine</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-lg-8">
+    <div class="tab-content">
+      <div class="tab-pane active show" id="tab-1">
+        <h3>Tests sanguins</h3>
+        <p>Les tests sanguins sont utilisés pour analyser la composition du sang et détecter diverses anomalies, telles que les infections, les maladies auto-immunes et les troubles de la coagulation. Ils peuvent également aider à surveiller la fonction des organes, comme les reins et le foie, et à évaluer l'efficacité des traitements médicaux. Les tests sanguins courants incluent la numération formule sanguine, le bilan lipidique, le dosage des hormones et les tests de la fonction hépatique.</p>
+      </div>
+      <div class="tab-pane" id="tab-2">
+        <h3>Tests COVID-19</h3>
+        <p>Les tests COVID-19 permettent de détecter la présence du virus SARS-CoV-2, responsable de la maladie COVID-19. Il existe différents types de tests COVID-19, notamment les tests PCR, les tests antigéniques et les tests sérologiques. Les tests PCR et antigéniques sont utilisés pour diagnostiquer une infection active, tandis que les tests sérologiques permettent de détecter la présence d'anticorps, indiquant une infection passée ou une réponse immunitaire au vaccin. Les tests COVID-19 sont essentiels pour contrôler la propagation du virus et prendre des mesures de santé publique appropriées.</p>
+      </div>
+      <div class="tab-pane" id="tab-3">
+        <h3>Tests d'urine</h3>
+        <p>Les tests d'urine, également appelés analyses d'urine, sont des examens non invasifs qui permettent d'évaluer la composition de l'urine pour détecter divers problèmes de santé. Ils peuvent être utilisés pour diagnostiquer et surveiller des affections telles que les infections urinaires, les maladies rénales et le diabète. Les tests d'urine peuvent également être utilisés pour détecter la présence de substances, comme des médicaments ou des drogues, et pour contrôler la réponse à certains traitements. Les analyses d'urine courantes comprennent l'examen cytobactériologique des urines (ECBU), le dosage de la créatinine et le test de dépistage des drogues.</p>
+</div>
+</div>
+</div>
+</div>
+
+  </div>
+</section><!-- End Examens médicaux Section -->
+    <h1>Modifier le Résultat</h1>
+
+    {{ include('results/_form.html.twig', {'button_label': 'Update'}) }}
+
+    
+    <a href="{{ path('app_results_indexBack') }}">Retour</a>
+
+    {{ include('results/_delete_form.html.twig') }}
+{% endblock %}

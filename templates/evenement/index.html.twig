@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <h1>Evenement </h1>
+<form action="{{ path('recherche3') }}" method="GET">
+    <input type="text" name="searche3" id="searche">
+    <button type="submit">Rechercher</button>
+</form>
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Dteeve</th>
+                <th>Lieueve</th>
+                <th>Heure</th>
+                <th>Descreve</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.type }}</td>
+                <td>{{ evenement.dteeve ? evenement.dteeve|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.lieueve }}</td>
+                <td>{{ evenement.hreve  }}</td>
+                <td>{{ evenement.descreve }}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

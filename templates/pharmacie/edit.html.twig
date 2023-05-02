@@ -1,0 +1,13 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Edit Pharmacie{% endblock %}
+
+{% block body %}
+    <h1>Modifier Pharmacie</h1>
+
+    {{ include('pharmacie/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_pharmacie_indexBack') }}">Retour</a>
+
+
+{% endblock %}

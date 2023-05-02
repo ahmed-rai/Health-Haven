@@ -1,0 +1,44 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Action index{% endblock %}
+
+{% block body %}
+    <h1>Action </h1>
+<a href="{{ path('actions_tri') }}" class="btn btn-primary">Trier par heure</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Nom</th>
+            <th>Lieuact</th>
+            <th>Dteact</th>
+            <th>Hract</th>
+            <th>Descract</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for action in actions %}
+            <tr>
+
+                <td>{{ action.nom }}</td>
+                <td>{{ action.lieuact }}</td>
+                <td>{{ action.dteact  }}</td>
+                <td>{{ action.hract }}</td>
+                <td>{{ action.descract }}</td>
+                <td>
+                    <a href="{{ path('app_action_show', {'id': action.id}) }}">show</a>
+                    <a href="{{ path('app_action_edit', {'id': action.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_action_new') }}">Create new</a>
+{% endblock %}

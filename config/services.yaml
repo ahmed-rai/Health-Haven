@@ -1,0 +1,46 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    socket_server_url: 'http://127.0.0.1:3000'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $accountSid: 'AC03ecff0748671a798d05d9b5c89040a3'
+            $authToken: '120fc16b860df51dbab6387f4a6e1e1b'
+            $twilioPhoneNumber: '16205098893'
+            $socketServerUrl: '%socket_server_url%'
+
+    
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\Repository\AtmRepository:
+        autowire: true
+    App\Controller\AtmController:
+        autowire: true
+    App\Controller\ResultsController:
+        autowire: true
+    App\Controller\MainController:
+        autowire: true
+    App\Controller\LaboratoireController:
+        autowire: true   
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    App\Service\NotificationServer:
+        arguments:
+            $socketServerUrl: '%socket_server_url%'
+  

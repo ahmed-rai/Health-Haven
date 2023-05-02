@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Action index{% endblock %}
+
+{% block body %}
+    <h1>Action </h1>
+      <form action="{{ path('recherche2') }}" method="GET">
+    <input type="text" name="searche2" id="searche">
+    <button type="submit">Rechercher</button>
+</form>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Nom</th>
+                <th>Lieuact</th>
+                <th>Dteact</th>
+                <th>Hract</th>
+                <th>Descract</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for action in actions %}
+            <tr>
+
+                <td>{{ action.nom }}</td>
+                <td>{{ action.lieuact }}</td>
+                <td>{{ action.dteact  }}</td>
+                <td>{{ action.hract }}</td>
+                <td>{{ action.descract }}</td>
+               
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

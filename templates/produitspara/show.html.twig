@@ -1,0 +1,42 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Produitspara{% endblock %}
+
+{% block body %}
+    <h1>Produitspara</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produitspara.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ produitspara.nom }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ produitspara.reference }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ produitspara.categorie }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ produitspara.description }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{{ produitspara.disponibilite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produitspara_indexBack') }}">Retour</a>
+
+    <a href="{{ path('app_produitspara_edit', {'id': produitspara.id}) }}">edit</a>
+
+    {{ include('produitspara/_delete_form.html.twig') }}
+{% endblock %}

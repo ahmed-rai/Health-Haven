@@ -1,0 +1,46 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <h1>Evenement </h1>
+<a href="{{ path('evenements_tri_date') }}" class="btn btn-primary">Trier par date</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Dteeve</th>
+            <th>Lieueve</th>
+            <th>Heure</th>
+            <th>Descreve</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.type }}</td>
+                <td>{{ evenement.dteeve ? evenement.dteeve|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.lieueve }}</td>
+                <td>{{ evenement.hreve  }}</td>
+                <td>{{ evenement.descreve }}</td>
+                <td>
+                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">Afficher</a>
+                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_evenement_new') }}">Ajouter</a>
+{% endblock %}

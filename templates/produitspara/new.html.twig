@@ -1,0 +1,11 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}New Produitspara{% endblock %}
+
+{% block body %}
+    <h1>Create new Produitspara</h1>
+
+    {{ include('produitspara/_form.html.twig') }}
+
+    <a href="{{ path('app_produitspara_index') }}">back to list</a>
+{% endblock %}

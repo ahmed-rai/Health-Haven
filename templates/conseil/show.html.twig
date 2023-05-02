@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conseil{% endblock %}
+
+{% block body %}
+    <h1>Conseil</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ conseil.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ conseil.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ conseil.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_conseil_index') }}">Retour</a>
+
+
+
+{% endblock %}

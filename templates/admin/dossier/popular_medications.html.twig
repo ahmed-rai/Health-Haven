@@ -1,0 +1,24 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Popular Medicaments{% endblock %}
+
+{% block body %}
+    <h1>Popular Medicaments</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Medicaments</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for medication in medications %}
+                <tr>
+                    <td>{{ medication.medication }}</td>
+                    <td>{{ medication.total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

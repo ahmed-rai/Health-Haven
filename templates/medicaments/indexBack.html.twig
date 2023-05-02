@@ -1,0 +1,41 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Medicaments index{% endblock %}
+
+{% block body %}
+    <h1>Medicaments index</h1>
+<a href="{{ path('medicaments_list') }}" class="btn btn-primary">Trier par Nom</a>
+<a href="{{ path('medicaments_tridi') }}" class="btn btn-primary">Trier par Disponibilite</a>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Nom Medicament</th>
+            <th>Disponibilite</th>
+            <th>Prix</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for medicament in medicaments %}
+            <tr>
+                <td>{{ medicament.dci }}</td>
+                <td>{{ medicament.disponibilite }}</td>
+                <td>{{ medicament.prix }}</td>
+                <td>
+                    <a href="{{ path('app_medicaments_show', {'id': medicament.id}) }}">show</a>
+                    <a href="{{ path('app_medicaments_edit', {'id': medicament.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_medicaments_new') }}">Create new</a>
+{% endblock %}

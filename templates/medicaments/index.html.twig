@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Medicaments index{% endblock %}
+
+{% block body %}
+
+<!-- ======= Médicaments Section ======= -->
+<section id="medicaments" class="medicaments">
+  <div class="container">
+    <div class="section-title">
+      <h2>Médicaments</h2>
+      <p>Les médicaments sont utilisés pour prévenir, traiter ou soulager les symptômes de diverses maladies et affections. Ils peuvent être administrés sous différentes formes, telles que les comprimés, les capsules, les liquides, les injections ou les inhalateurs. Dans cette section, nous aborderons différents types de médicaments et leurs applications dans divers domaines médicaux.</p>
+    </div>
+<div class="row gy-4">
+  <div class="col-lg-4">
+    <ul class="nav nav-tabs flex-column">
+      <li class="nav-item">
+        <a class="nav-link active show" data-bs-toggle="tab" href="#tab-4">Antibiotiques</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Antidouleurs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#tab-6">Antidépresseurs</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-lg-8">
+    <div class="tab-content">
+      <div class="tab-pane active show" id="tab-4">
+        <h3>Antibiotiques</h3>
+        <p>Les antibiotiques sont des médicaments utilisés pour traiter les infections bactériennes en inhibant la croissance des bactéries ou en les détruisant. Ils sont généralement prescrits pour des infections telles que la pneumonie, les infections des voies urinaires, la sinusite et la bronchite. Les antibiotiques n'ont pas d'effet sur les infections virales, comme le rhume ou la grippe. Il est essentiel de prendre les antibiotiques conformément aux prescriptions du médecin pour éviter le développement de résistances bactériennes.</p>
+      </div>
+      <div class="tab-pane" id="tab-5">
+        <h3>Antidouleurs</h3>
+        <p>Les antidouleurs, également appelés analgésiques, sont des médicaments utilisés pour soulager la douleur. Ils agissent en interférant avec les signaux de la douleur envoyés au cerveau. Les antidouleurs peuvent être classés en deux catégories principales: les analgésiques non opioïdes, comme l'acétaminophène et les anti-inflammatoires non stéroïdiens (AINS), et les analgésiques opioïdes, comme la morphine et l'oxycodone. Les antidouleurs sont prescrits pour traiter diverses conditions douloureuses, telles que les maux de tête, les douleurs dentaires, les douleurs musculaires et les douleurs post-opératoires.</p>
+      </div>
+      <div class="tab-pane" id="tab-6">
+        <h3>Antidépresseurs</h3>
+            <p>Les antidépresseurs sont des médicaments utilisés pour traiter les troubles dépressifs et d'autres conditions psychiatriques, comme les troubles anxieux, les troubles obsessionnels-compulsifs et les troubles du stress post-traumatique. Ils agissent en modifiant l'équilibre des substances chimiques dans le cerveau, appelées neurotransmetteurs, qui sont impliquées dans la régulation de l'humeur et des émotions. Les principaux types d'antidépresseurs comprennent les inhibiteurs sélectifs de la recapture de la sérotonine (ISRS), les inhibiteurs de la recapture de la sérotonine et de la noradrénaline (IRSN), les antidépresseurs tricycliques (ATC) et les inhibiteurs de la monoamine oxydase (IMAO). Le choix de l'antidépresseur dépend de la gravité des symptômes, des effets secondaires potentiels et des interactions médicamenteuses.</p>
+  </div>
+</div>
+</div>
+</div>
+  </div>
+</section><!-- End Médicaments Section -->
+
+
+
+
+
+
+
+    <h1>Medicaments index</h1>
+<form action="{{ path('recherche') }}" method="GET">
+    <input type="text" name="searche" id="searche">
+    <button type="submit">Rechercher</button>
+</form>
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Nom Medicament</th>
+                <th>Disponibilite</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medicament in medicaments %}
+            <tr>
+
+                <td>{{ medicament.dci }}</td>
+                <td>{{ medicament.disponibilite }}</td>
+                <td>{{ medicament.prix }}</td>
+                <td>
+                    <a href="{{ path('app_medicaments_show', {'id': medicament.id}) }}">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+  <h1>Total Prix</h1>
+
+{% endblock %}

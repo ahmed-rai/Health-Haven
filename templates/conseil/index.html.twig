@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conseil index{% endblock %}
+
+{% block body %}
+
+<!-- ======= Conseils médicaux Section ======= -->
+<section id="conseils" class="conseils">
+  <div class="container">
+    <div class="section-title">
+      <h2>Conseils médicaux</h2>
+      <p>Les conseils médicaux sont des informations et des recommandations données par des professionnels de la santé pour aider les patients à prendre des décisions éclairées concernant leur santé et leur bien-être. Ils peuvent inclure des informations sur la prévention des maladies, le maintien d'un mode de vie sain, le traitement et la gestion des conditions médicales, et les choix de traitements appropriés. Dans cette section, nous aborderons différents types de conseils médicaux et leur utilité dans divers domaines médicaux.</p>
+    </div>
+    <div class="row gy-4">
+      <div class="col-lg-4">
+        <ul class="nav nav-tabs flex-column">
+          <li class="nav-item">
+            <a class="nav-link active show" data-bs-toggle="tab" href="#tab-4">Prévention</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Mode de vie sain</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-6">Gestion des maladies</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-8">
+        <div class="tab-content">
+          <div class="tab-pane active show" id="tab-4">
+            <h3>Prévention</h3>
+            <p>La prévention des maladies est un aspect essentiel de la santé publique qui vise à réduire l'incidence et la gravité des maladies en identifiant et en contrôlant les facteurs de risque. Les conseils de prévention peuvent inclure des recommandations sur la vaccination, le dépistage des maladies, l'hygiène personnelle et la prévention des infections. Adopter des pratiques de prévention peut aider à réduire le risque de développer des maladies et à maintenir une bonne santé.</p>
+          </div>
+          <div class="tab-pane" id="tab-5">
+            <h3>Mode de vie sain</h3>
+            <p>Adopter un mode de vie sain est essentiel pour prévenir les maladies et maintenir une bonne santé physique et mentale. Les conseils sur un mode de vie sain peuvent inclure des recommandations sur une alimentation équilibrée, l'exercice physique régulier, le maintien d'un poids santé, la gestion du stress, le sommeil suffisant et l'évitement des comportements à risque, comme le tabagisme et la consommation excessive d'alcool. Suivre ces conseils peut améliorer la qualité de vie et réduire le risque de développer des maladies chroniques.</p>
+          </div>
+          </section><!-- End Examens médicaux Section -->
+    <h1>Conseil index</h1>
+    <form action="{{ path('recherche1') }}" method="GET">
+        <input type="text" name="searche1" id="search1e">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for conseil in conseils %}
+            <tr>
+                <td>{{ conseil.titre }}</td>
+                <td>{{ conseil.description }}</td>
+                <td>
+                    <a href="{{ path('app_conseil_show', {'id': conseil.id}) }}">Afficher</a>
+                    <br>
+                    <form action="{{ path('app_conseil_like', {'id': conseil.id}) }}" method="POST">
+                        <button type="submit" name="like">Like</button>
+                    </form>
+                    <form action="{{ path('app_conseil_dislike', {'id': conseil.id}) }}" method="POST">
+                        <button type="submit" name="dislike">Dislike</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

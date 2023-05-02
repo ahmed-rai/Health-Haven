@@ -1,0 +1,52 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Liste des questions{% endblock %}
+
+{% block body %}
+    <h2>Liste des questions</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Réponse 1</th>
+                <th>Score 1</th>
+                <th>Réponse 2</th>
+                <th>Score 2</th>
+                <th>Réponse 3</th>
+                <th>Score 3</th>
+                <th>Réponse 4</th>
+                <th>Score 4</th>
+                <th>Quiz</th>
+                <th>Docteur</th>
+                <th>Gérer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for test in tests %}
+            <tr>
+                <td>{{ test.question }}</td>
+                <td>{{ test.answer1 }}</td>
+                <td>{{ test.score1 }}</td>
+                <td>{{ test.answer2 }}</td>
+                <td>{{ test.score2 }}</td>
+                <td>{{ test.answer3 }}</td>
+                <td>{{ test.score3 }}</td>
+                <td>{{ test.answer4 }}</td>
+                <td>{{ test.score4 }}</td>
+                <td>{{ test.quiz.name }}</td>
+                <td>Dr Ahmed</td>
+                <td>
+                    <a href="{{ path('app_test_show', {'id': test.id}) }}">Consulter</a>
+                   
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">Pas de questions</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+  
+{% endblock %}

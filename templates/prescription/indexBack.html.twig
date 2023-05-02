@@ -1,0 +1,97 @@
+{% extends 'tbib.html.twig' %}
+
+{% block title %}Prescription index{% endblock %}
+
+{% block body %}
+<!-- ======= Departments Section ======= -->
+<section id="departments" class="departments">
+  <div class="container">
+<div class="section-title">
+  <h2>Departments</h2>
+  <p>Les médicaments jouent un rôle important dans le traitement de diverses maladies et troubles. Ils peuvent aider à soulager les symptômes, à prévenir les complications et à améliorer la qualité de vie des patients. Dans cette section, nous aborderons différents types de médicaments et leurs applications dans divers domaines médicaux.</p>
+</div>
+
+<div class="row gy-4">
+  <div class="col-lg-3">
+    <ul class="nav nav-tabs flex-column">
+      <li class="nav-item">
+        <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Antidépresseurs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Anxiolytiques</a>
+      </li>
+      
+    </ul>
+  </div>
+  <div class="col-lg-9">
+    <div class="tab-content">
+      <div class="tab-pane active show" id="tab-1">
+        <div class="row gy-4">
+          <div class="col-lg-8 details order-2 order-lg-1">
+            <h3>Antidépresseurs</h3>
+            <p class="fst-italic">Les antidépresseurs sont des médicaments utilisés pour traiter la dépression et d'autres troubles de l'humeur. Ils agissent en rétablissant l'équilibre des neurotransmetteurs dans le cerveau, ce qui peut améliorer l'humeur et réduire les symptômes de la dépression.</p>
+            <p>Il existe plusieurs types d'antidépresseurs, dont les inhibiteurs sélectifs de la recapture de la sérotonine (ISRS), les inhibiteurs de la recapture de la sérotonine et de la noradrénaline (IRSN) et les antidépresseurs tricycliques. Le choix de l'antidépresseur dépend des symptômes du patient et de la réponse individuelle au traitement.</p>
+          </div>
+          <div class="col-lg-4 text-center order-1 order-lg-2">
+            <img src="assets/img/departments-1.jpg" alt="" class="img-fluid">
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab-2">
+        <div class="row gy-4">
+          <div class="col-lg-8 details order-2 order-lg-1">
+            <h3>Anxiolytiques</h3>   
+ <p class="fst-italic">Les anxiolytiques sont des médicaments utilisés pour traiter l'anxiété et les troubles anxieux. Ils agissent en réduisant l'activité du système nerveux central, ce qui entraîne une diminution des sensations de peur, d'inquiétude et de tension.</p>
+<p>Les anxiolytiques comprennent les benzodiazépines, les buspirone et certains antidépresseurs, tels que les inhibiteurs sélectifs de la recapture de la sérotonine (ISRS) et les inhibiteurs de la recapture de la sérotonine et de la noradrénaline (IRSN). Les médicaments sont généralement prescrits en fonction de la gravité et de la durée des symptômes, ainsi que de la réponse individuelle du patient au traitement. Il est important de noter que les anxiolytiques peuvent entraîner une dépendance et doivent être utilisés avec précaution, surtout sur de longues périodes.</p>
+</div>
+<div class="col-lg-4 text-center order-1 order-lg-2">
+<img src="assets/img/departments-2.jpg" alt="" class="img-fluid">
+      </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Departments Section -->
+
+
+
+    <h1>Prescription index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom Medicament</th>
+            <th>Dosage</th>
+            <th>Signature</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for prescription in prescriptions %}
+            <tr>
+                <td>{{ prescription.nomMed }}</td>
+                <td>{{ prescription.dosage }}</td>
+                <td>{{ prescription.signature }}</td>
+                <td>
+                    <a href="{{ path('app_prescription_show', {'dosage': prescription.dosage}) }}">Afficher</a>
+
+                    <a href="{{ path('app_prescription_edit', {'dosage': prescription.dosage}) }}">Modifier</a>
+                     
+      <a class="btn btn-success" href="{{ path('display_prescription_list',{'id':prescription.id}) }}">Imprimer</a>
+                            
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_prescription_new') }}">Ajouter</a>
+    <a class="btn px-3 mt-auto mx-auto" href="{{path('pdf') }}">export pdf</a>
+{% endblock %}

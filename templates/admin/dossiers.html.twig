@@ -1,0 +1,80 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Liste des dossiers{% endblock %}
+
+{% block body %}
+   <h2>Liste des dossiers</h2>
+{% block search %}
+<form id="search-form" action="{{ path('admin_dossiers_ajax_search') }}" method="GET">
+    <div class="input-group mb-3">
+<input type="text" class="form-control" placeholder="Chercher un dossier" name="q" value="{{ app.request.get('q') }}" id="search-input">
+        <button class="btn btn-outline-secondary" type="submit">Chercher</button>
+    </div>
+</form>
+{% endblock %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Médicaments</th>
+            <th>Date de Creations</th>
+            <th>Phobies</th>
+            <th>Résultats</th>
+            <th>Docteur</th>
+           
+        </tr>
+    </thead>
+    <tbody id="dossiers-tbody">
+   
+    {% for dossier in dossiers %}
+        <tr>
+            <td>{{ dossier.nom }}</td>
+            <td>{{ dossier.medicaments }}</td>
+             <td>{{ dossier.datecreation }}</td>
+            <td>{{ dossier.phobies }}</td>
+            <td>{{ dossier.resultats }}</td>
+            <td>Dr Ahmed</td>
+           
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">Pas de dossiers</td>
+        </tr>
+    {% endfor %}
+
+
+    </tbody>
+</table>
+{# templates/dossier/index.html.twig #}
+<div id="stats">
+  {# ... #}
+
+  <h3>Médicaments les plus populaires</h3>
+  <canvas id="popular-medications-chart"></canvas>
+
+  {# Add the popular medications data as a JSON string #}
+  <script id="popular-medications-data" type="application/json">
+    {{ medications|json_encode()|raw }}
+  </script>
+</div>
+
+  
+   <div id="stats">
+       <!-- Add your statistics here -->
+      
+       
+       <h3>Médicaments les plus populaires</h3>
+       <canvas id="popular-medications-chart"></canvas>
+   </div>
+{% block javascripts %}
+   <script src="{{ asset('back/js/dossier-search.js') }}"></script>
+   <script src="{{ asset('back/js/dossier-stats.js') }}"></script>
+
+
+        <script src="{{ asset('back/js/chart.js') }}"></script>
+   
+{% endblock %}
+
+
+{% endblock %}

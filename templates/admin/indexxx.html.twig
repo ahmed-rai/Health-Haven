@@ -1,0 +1,46 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block body %}
+    <h1>Admin Dashboard</h1>
+
+    <h1>Vos Quiz</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Etat</th>
+            <th>Gerer</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for quiz in quizzes %}
+        <tr>
+            <td>{{ quiz.name }}</td>
+            <td>{{ quiz.description }}</td>
+            <td>
+                {% if quiz.isApproved %}
+                <span>Approuvé</span>
+                {% else %}
+                <span>En attente</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ path('app_quiz_show', {'id': quiz.id}) }}">Afficher</a>
+                {% if not quiz.isApproved %}
+                <a href="{{ path('app_quiz_approve', {'id': quiz.id}) }}" class="btn btn-primary">Approuver</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">Pas de Quiz</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

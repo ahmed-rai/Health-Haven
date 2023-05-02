@@ -1,0 +1,13 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Edit Action{% endblock %}
+
+{% block body %}
+    <h1>Edit Action</h1>
+
+    {{ include('action/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_action_indexBack') }}">Retour</a>
+
+    {{ include('action/_delete_form.html.twig') }}
+{% endblock %}

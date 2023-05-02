@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+        {{ parent() }}
+        <style>
+            /* Style pour le design des résultats de recherche */
+            .card {
+                border: none;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: box-shadow 0.3s ease-in-out;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin-bottom: 0;
+            }
+
+            .card-text {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            #searchResults {
+                margin-top: 20px;
+            }
+            .ana{
+                margin-top:170px;
+            }
+            .ana1{
+                margin-top:70px;
+            }
+            
+        </style>
+    {% endblock %}
+ 
+
+
+    
+{% block body %}
+
+   
+    <div class="container my-5 ana">
+        <form id="searchForm" class="mb-5">
+            <div class="form-group ana">
+                <input type="text" id="searchInput" name="searchInput" class="form-control" placeholder="Rechercher une parapharmacie">
+            </div>
+            <button type="submit" class="btn btn-primary ana1">Rechercher</button>
+        </form>
+
+        <div class="row justify-content-center" id="searchResults"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            // Intercepter le formulaire de recherche lorsqu'il est soumis
+            $('#searchForm').submit(function(event) {
+                event.preventDefault(); // Empêcher le formulaire de recharger la page
+
+                // Récupérer la valeur du champ de recherche
+                var searchValue = $('#searchInput').val();
+
+                // Envoyer une requête AJAX pour récupérer les résultats de la recherche
+                $.ajax({
+                    url: '/search',
+                    method: 'GET',
+                    data: {q: searchValue},
+                    success: function(response) {
+                        // Afficher les résultats de la recherche dans la div #searchResults
+                        var results = JSON.parse(response);
+                        var html = '';
+                        for (var i = 0; i < results.length; i++) {
+                            html += '<div class="col-md-4 my-3">';
+                            html += '<div class="card">';
+                            html += '<div class="card-header">';
+                            html += '<h5 class="card-title">' + results[i].nom + '</h5>';
+                            html += '</div>';
+                            html += '<div class="card-body">';
+                            html += '<p class="card-text">' + results[i].adresse + '</p>';
+                            html += '<p class="card-text">' + results[i].phone + '</p>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        $('#searchResults').html(html);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

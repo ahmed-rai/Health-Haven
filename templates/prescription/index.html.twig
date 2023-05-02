@@ -1,0 +1,27 @@
+{% extends 'tbib.html.twig' %}
+
+{% block title %}Prescription index{% endblock %}
+
+{% block body %}
+    <h1>Prescription index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom Medicament</th>
+                <th>Dosage</th>
+                <th>Signature</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for prescription in prescriptions %}
+            <tr>
+                <td>{{ prescription.nomMed  }}</td>
+                <td>{{ prescription.dosage }}</td>
+                <td>{{ prescription.signature }}</td>
+
+        </tbody>
+    </table>
+
+{% endblock %}

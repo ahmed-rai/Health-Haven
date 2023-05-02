@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produitspara index{% endblock %}
+
+{% block body %}
+    <h1>Produitspara index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Reference</th>
+                <th>Categorie</th>
+                <th>Description</th>
+                <th>Disponibilite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produitspara in produitsparas %}
+            <tr>
+
+                <td>{{ produitspara.nom }}</td>
+                <td>{{ produitspara.reference }}</td>
+                <td>{{ produitspara.categorie }}</td>
+                <td>{{ produitspara.description }}</td>
+                <td>{{ produitspara.disponibilite }}</td>
+                <td>
+                    <a href="{{ path('app_produitspara_show', {'id': produitspara.id}) }}">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

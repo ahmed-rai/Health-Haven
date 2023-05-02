@@ -1,0 +1,14 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Edit Laboratoire{% endblock %}
+
+{% block body %}
+    <h1>Modifier Laboratoire</h1>
+
+    {{ include('laboratoire/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+
+    <a href="{{ path('app_laboratoire_index') }}">Retour</a>
+
+    {{ include('laboratoire/_delete_form.html.twig') }}
+{% endblock %}

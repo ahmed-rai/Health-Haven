@@ -1,0 +1,97 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Health Haven{% endblock %}
+
+{% block body %}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-YnznVtMWhG2l5O5I3qC1hTpjOatDGfkhBZ+/XcZttvp8MIvzBjH+LTaUfme6zWd+v0J+tF0M7VYXpz6zg8WOvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  th,
+  td {
+    vertical-align: middle !important;
+  }
+  
+  .btn i {
+    margin-right: 5px;
+  }
+
+
+</style>
+
+
+
+        
+        
+
+        {% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<div class="container" style="width: 80%; margin-right:13px; margin-top: 70px;">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-uppercase">Liste des Parapharmacies</h2>
+        <a href="{{ path('parapharmacies_new') }}" class="btn btn-success "><i class="bi bi-plus-circle"></i> Nouveau</a>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover ">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nom de la parapharmacie</th>
+              <th scope="col">Adresse</th>
+              <th scope="col">Numéro de téléphone</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in parapharmacies %}
+              <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.nom }}</td>
+                <td>{{ p.adresse }}</td>
+                <td>{{ p.phone }}</td>
+                <td>
+                  <div class="d-flex justify-content-center align-items-center">
+                    <a href="{{ path('parapharmacies_show', {'id': p.id}) }}" class="btn btn-info btn-sm mx-2"><i class="bi bi-eye"></i></a>
+                    <a href="{{ path('parapharmacies_edit', {'id': p.id}) }}" class="btn btn-warning btn-sm mx-2"><i class="bi bi-pencil"></i></a>
+                    <a href="{{ path('parapharmacies_delete', {'id': p.id}) }}" class="btn btn-danger btn-sm mx-2"><i class="bi bi-trash"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette parapharmacie ?')"></i></a>
+                  </div>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="5" class="text-center">Aucune parapharmacie trouvée.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+
+

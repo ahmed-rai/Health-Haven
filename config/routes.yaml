@@ -1,0 +1,13 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+
+
+search:
+  path: /atm/search
+  controller: App\Controller\AtmController::search
+  methods: [GET, POST]
+app_map:
+    path: '/map'
+    controller: 'App\Controller\LaboratoireController::map'
